@@ -1,6 +1,0 @@
-framework module Pods_TriviaRich_iOS {
-  umbrella header "Pods-TriviaRich-iOS-umbrella.h"
-
-  export *
-  module * { export * }
-}
