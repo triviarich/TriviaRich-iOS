@@ -22,16 +22,22 @@ class MatchupView: UIView {
     private let userImageAndLabelView = UIView()
     private let opponentView = UIView()
     private let opponentImageAndLabelView = UIView()
+    private let playButton = UIButton()
     
+    private var dividerViewLeftOffset: Constraint? = nil
+    private var dividerViewRightOffset: Constraint? = nil
     private var userViewOffset: Constraint? = nil
     private var opponentViewOffset: Constraint? = nil
     
     func animateIn() {
         userViewOffset?.update(offset: 0)
         opponentViewOffset?.update(offset: 0)
+        dividerViewRightOffset?.update(offset: 0)
+        dividerViewLeftOffset?.update(offset: 0)
         
         userView.setNeedsLayout()
         opponentView.setNeedsLayout()
+        dividerView.setNeedsLayout()
         
         let timing = CAMediaTimingFunction(controlPoints: 0.1, 0.8, 0.4, 1)
         CATransaction.begin()
@@ -57,13 +63,49 @@ class MatchupView: UIView {
         setupPlayButton()
     }
     
+    @objc private func tappedReady() {
+        playButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            self.playButton.transform = .identity
+        }, completion: { complete in
+            if complete {
+                self.animateCountdown()
+            }
+        })
+    }
+    
+    private func animateCountdown(seconds: Int = 3) {
+        if seconds == -1 {
+            return
+        } else if seconds == 3 {
+            playButton.titleLabel?.font = UIFont.triviarich(style: .boldItalic, size: 32)
+            playButton.setTitle("\(seconds)", for: .normal)
+            return animateCountdown(seconds: seconds - 1)
+        }
+        
+        UIView.animate(withDuration: 0.1, delay: 0.8, options: [], animations: {
+            self.playButton.titleLabel?.alpha = 0
+        }, completion: { complete in
+            if complete {
+                self.playButton.setTitle("\(seconds)", for: .normal)
+                UIView.animate(withDuration: 0.1, animations: {
+                    self.playButton.titleLabel?.alpha = 1
+                }, completion: { complete in
+                    if complete {
+                        self.animateCountdown(seconds: seconds - 1)
+                    }
+                })
+            }
+        })
+    }
+    
     private func setupDividerView() {
         dividerView.backgroundColor = .black
         dividerView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(dividerView)
         dividerView.snp.makeConstraints { make in
-            make.right.equalTo(self.snp.right)
-            make.left.equalTo(self.snp.left)
+            self.dividerViewRightOffset = make.right.equalTo(self.snp.right).offset(-(UIScreen.main.bounds.size.width / 2)).constraint
+            self.dividerViewLeftOffset = make.left.equalTo(self.snp.left).offset(UIScreen.main.bounds.size.width / 2).constraint
             make.centerY.equalTo(self.snp.centerY)
             make.height.equalTo(1)
         }
@@ -164,15 +206,15 @@ class MatchupView: UIView {
     }
     
     private func setupPlayButton() {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = playButtonSize.half
-        button.setTitle("Ready!", for: UIControlState.normal)
-        button.titleLabel?.font = UIFont.triviarich(style: .boldItalic)
-        button.backgroundColor = .triviarichGreen
-        button.tintColor = .white
-        addSubview(button)
-        button.snp.makeConstraints { make in
+        playButton.translatesAutoresizingMaskIntoConstraints = false
+        playButton.layer.cornerRadius = playButtonSize.half
+        playButton.setTitle("Ready!", for: .normal)
+        playButton.titleLabel?.font = UIFont.triviarich(style: .boldItalic)
+        playButton.backgroundColor = .triviarichGreen
+        playButton.tintColor = .white
+        playButton.addTarget(self, action: #selector(tappedReady), for: .touchDown)
+        addSubview(playButton)
+        playButton.snp.makeConstraints { make in
             make.center.equalTo(self.snp.center)
             make.height.equalTo(self.playButtonSize)
             make.width.equalTo(self.playButtonSize)

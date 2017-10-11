@@ -22,15 +22,21 @@ class WaitingViewController: UIViewController {
 
         title = "\(lobby.priceString(capitalized: true)) game"
         
-        setFoundOpponent()
+        setupWaiting()
+        setupFoundOpponent()
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in
+            UIView.transition(from: self.loadingView, to: self.matchupView, duration: 0.5, options: [.transitionCrossDissolve, .showHideTransitionViews]) { complete in
+                self.matchupView.animateIn()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        matchupView.animateIn()
+//        matchupView.animateIn()
+        loadingView.beginAnimation()
     }
     
-    private func setWaiting() {
-        containerView.removeSubviews()
+    private func setupWaiting() {
         containerView.addSubview(loadingView)
         loadingView.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.top)
@@ -40,8 +46,7 @@ class WaitingViewController: UIViewController {
         }
     }
     
-    private func setFoundOpponent() {
-        containerView.removeSubviews()
+    private func setupFoundOpponent() {
         containerView.addSubview(matchupView)
         matchupView.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.top)
@@ -49,6 +54,7 @@ class WaitingViewController: UIViewController {
             make.bottom.equalTo(containerView.snp.bottom)
             make.left.equalTo(containerView.snp.left)
         }
+        matchupView.isHidden = true
     }
 
 }
