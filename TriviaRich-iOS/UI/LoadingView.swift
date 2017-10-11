@@ -11,7 +11,10 @@ import SnapKit
 
 class LoadingView: UIView {
 
-    private let playButtonSize: CGFloat = 120
+    private let findingButtonSize: CGFloat = 120
+    private let shockwaveGrowth: CGFloat = 800
+    private let animationDuration = 1.5
+    private let shockwaveFadeDuration = 0.2
     
     private let shockwave = UIView()
     private let findingButton = UIButton()
@@ -22,37 +25,37 @@ class LoadingView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         setupShockwave()
-        setupPlayButton()
+        setupFindingButton()
     }
     
     func beginAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true) { timer in
             DispatchQueue.main.async {
                 CATransaction.begin()
                 
                 // shockwave animations
                 self.shockwave.snp.updateConstraints { make in
-                    make.size.equalTo(800)
+                    make.size.equalTo(self.shockwaveGrowth)
                 }
                 self.shockwave.setNeedsLayout()
-                UIView.animate(withDuration: 0.8, animations: {
-                    self.shockwave.layer.cornerRadius = 400
+                UIView.animate(withDuration: self.animationDuration - self.shockwaveFadeDuration, animations: {
+                    self.shockwave.layer.cornerRadius = self.shockwaveGrowth.half
                     self.shockwave.layoutIfNeeded()
                 }, completion: { complete in
-                    UIView.animate(withDuration: 0.2, animations: {
+                    UIView.animate(withDuration: self.shockwaveFadeDuration, animations: {
                         self.shockwave.alpha = 0
                     }, completion: { complete in
                         self.shockwave.snp.updateConstraints { make in
-                            make.size.equalTo(self.playButtonSize)
+                            make.size.equalTo(self.findingButtonSize)
                         }
                         self.shockwave.alpha = 1
-                        self.shockwave.layer.cornerRadius = self.playButtonSize.half
+                        self.shockwave.layer.cornerRadius = self.findingButtonSize.half
                     })
                 })
                 
                 // searching spring animation
                 self.findingButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: self.animationDuration, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                     self.findingButton.transform = .identity
                 })
                 
@@ -63,20 +66,20 @@ class LoadingView: UIView {
     
     private func setupShockwave() {
         shockwave.translatesAutoresizingMaskIntoConstraints = false
-        shockwave.layer.cornerRadius = playButtonSize.half
+        shockwave.layer.cornerRadius = findingButtonSize.half
         shockwave.layer.borderColor = UIColor.triviarichGreen.cgColor
         shockwave.layer.borderWidth = 2
         shockwave.backgroundColor = UIColor.triviarichGreen.withAlphaComponent(0.3)
         addSubview(shockwave)
         shockwave.snp.makeConstraints { make in
             make.center.equalTo(self.snp.center)
-            make.size.equalTo(self.playButtonSize)
+            make.size.equalTo(self.findingButtonSize)
         }
     }
     
-    private func setupPlayButton() {
+    private func setupFindingButton() {
         findingButton.translatesAutoresizingMaskIntoConstraints = false
-        findingButton.layer.cornerRadius = playButtonSize.half
+        findingButton.layer.cornerRadius = findingButtonSize.half
         findingButton.setTitle("Searching", for: UIControlState.normal)
         findingButton.titleLabel?.font = UIFont.triviarich(style: .boldItalic)
         findingButton.backgroundColor = .triviarichGreen
@@ -84,8 +87,8 @@ class LoadingView: UIView {
         addSubview(findingButton)
         findingButton.snp.makeConstraints { make in
             make.center.equalTo(self.snp.center)
-            make.height.equalTo(self.playButtonSize)
-            make.width.equalTo(self.playButtonSize)
+            make.height.equalTo(self.findingButtonSize)
+            make.width.equalTo(self.findingButtonSize)
         }
     }
 

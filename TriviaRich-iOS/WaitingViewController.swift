@@ -24,7 +24,7 @@ class WaitingViewController: UIViewController {
         
         setupWaiting()
         setupFoundOpponent()
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
             UIView.transition(from: self.loadingView, to: self.matchupView, duration: 0.5, options: [.transitionCrossDissolve, .showHideTransitionViews]) { complete in
                 self.matchupView.animateIn()
             }
@@ -32,7 +32,6 @@ class WaitingViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        matchupView.animateIn()
         loadingView.beginAnimation()
     }
     
