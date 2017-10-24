@@ -7,12 +7,22 @@
 //
 
 import UIKit
+import ActionCableClient
+
+extension WaitingViewController: MatchupViewDelegate {
+    func onReady() {
+        self.performSegue(withIdentifier: "questionsSegue", sender: self)
+    }
+}
 
 class WaitingViewController: UIViewController {
     
     @IBOutlet weak var containerView: UIView!
     
     var lobby = Lobby()
+    var game = Game()
+    
+    private var socket: ActionCableClient!
     
     private var loadingView = LoadingView()
     private var matchupView = MatchupView()
@@ -22,11 +32,16 @@ class WaitingViewController: UIViewController {
 
         title = "\(lobby.priceString(capitalized: true)) game"
         
-        setupWaiting()
-        setupFoundOpponent()
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
-            UIView.transition(from: self.loadingView, to: self.matchupView, duration: 0.5, options: [.transitionCrossDissolve, .showHideTransitionViews]) { complete in
-                self.matchupView.animateIn()
+        setupLoadingView()
+        setupMatchupView()
+        Backend.requestGame { game in
+            if let game = game {
+                self.game = game
+                if game.open {
+                    self.waitForOpponent()
+                } else {
+                    self.transitionToMatchupView()
+                }
             }
         }
     }
@@ -35,7 +50,27 @@ class WaitingViewController: UIViewController {
         loadingView.beginAnimation()
     }
     
-    private func setupWaiting() {
+    private func waitForOpponent() {
+        socket = ActionCableClient(url: URL(string: "ws://localhost:3000/cable")!)
+        socket.connect()
+        socket.onConnected = {
+            let channel = self.socket.create("GamesChannel", identifier: ["id": self.game.id])
+            channel.onReceive = { json, error in
+                if let _ = json as? [String: Any] {
+                    self.game.open = false
+                    self.transitionToMatchupView()
+                }
+            }
+        }
+    }
+    
+    private func transitionToMatchupView() {
+        UIView.transition(from: self.loadingView, to: self.matchupView, duration: 0.5, options: [.transitionCrossDissolve, .showHideTransitionViews]) { complete in
+            self.matchupView.animateIn()
+        }
+    }
+    
+    private func setupLoadingView() {
         containerView.addSubview(loadingView)
         loadingView.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.top)
@@ -45,7 +80,8 @@ class WaitingViewController: UIViewController {
         }
     }
     
-    private func setupFoundOpponent() {
+    private func setupMatchupView() {
+        matchupView.delegate = self
         containerView.addSubview(matchupView)
         matchupView.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.top)
@@ -54,6 +90,12 @@ class WaitingViewController: UIViewController {
             make.left.equalTo(containerView.snp.left)
         }
         matchupView.isHidden = true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "questionsSegue" {
+            (segue.destination as! QuestionsViewController).game = game
+        }
     }
 
 }

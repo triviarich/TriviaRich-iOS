@@ -9,7 +9,13 @@
 import UIKit
 import SnapKit
 
+protocol MatchupViewDelegate {
+    func onReady()
+}
+
 class MatchupView: UIView {
+    
+    var delegate: MatchupViewDelegate? = nil
     
     private let playerViewsOffset = 100
     private let playerImageViewsSize: CGFloat = 100
@@ -76,6 +82,7 @@ class MatchupView: UIView {
     
     private func animateCountdown(seconds: Int = 3) {
         if seconds == -1 {
+            delegate?.onReady()
             return
         } else if seconds == 3 {
             playButton.titleLabel?.font = UIFont.triviarich(style: .boldItalic, size: 32)

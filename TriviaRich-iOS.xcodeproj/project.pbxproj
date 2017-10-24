@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6236F4601F9DBB780033C4DD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6236F45F1F9DBB780033C4DD /* Game.swift */; };
+		6247CD8D1F907AD000821766 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6247CD8C1F907AD000821766 /* QuestionsViewController.swift */; };
+		6247CD8F1F907B9500821766 /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6247CD8E1F907B9500821766 /* AnswerButton.swift */; };
+		6247CD911F907C5000821766 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6247CD901F907C5000821766 /* Question.swift */; };
+		6247CD951F907D0600821766 /* Questions.json in Resources */ = {isa = PBXBuildFile; fileRef = 6247CD941F907D0600821766 /* Questions.json */; };
 		6260FF6E1F7387C700D8043E /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6260FF6D1F7387C700D8043E /* LoadingView.swift */; };
 		6260FF701F738A2B00D8043E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6260FF6F1F738A2B00D8043E /* Extensions.swift */; };
 		6260FF721F738FAA00D8043E /* MatchupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6260FF711F738FAA00D8043E /* MatchupView.swift */; };
@@ -25,6 +30,11 @@
 
 /* Begin PBXFileReference section */
 		43E515E622169F2DC2501419 /* Pods-TriviaRich-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TriviaRich-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TriviaRich-iOS/Pods-TriviaRich-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		6236F45F1F9DBB780033C4DD /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		6247CD8C1F907AD000821766 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
+		6247CD8E1F907B9500821766 /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
+		6247CD901F907C5000821766 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		6247CD941F907D0600821766 /* Questions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Questions.json; sourceTree = "<group>"; };
 		6260FF6D1F7387C700D8043E /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6260FF6F1F738A2B00D8043E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6260FF711F738FAA00D8043E /* MatchupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchupView.swift; sourceTree = "<group>"; };
@@ -34,7 +44,7 @@
 		626E72FB1F72473100B17884 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		626E72FE1F72473100B17884 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		626E73001F72473100B17884 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		628B0C151F84A55C00568B7B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		628B0C151F84A55C00568B7B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		62F528601F73778100978A19 /* LobbiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbiesViewController.swift; sourceTree = "<group>"; };
 		62F528621F7378C700978A19 /* Lobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lobby.swift; sourceTree = "<group>"; };
 		62F528641F73794100978A19 /* Lobbies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Lobbies.json; sourceTree = "<group>"; };
@@ -68,6 +78,7 @@
 		624657381F8DC67E001E684A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6247CD8E1F907B9500821766 /* AnswerButton.swift */,
 				6260FF6D1F7387C700D8043E /* LoadingView.swift */,
 				6260FF711F738FAA00D8043E /* MatchupView.swift */,
 			);
@@ -78,6 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				62F528621F7378C700978A19 /* Lobby.swift */,
+				6247CD901F907C5000821766 /* Question.swift */,
+				6236F45F1F9DBB780033C4DD /* Game.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -105,11 +118,13 @@
 			isa = PBXGroup;
 			children = (
 				62F528641F73794100978A19 /* Lobbies.json */,
+				6247CD941F907D0600821766 /* Questions.json */,
 				626E73001F72473100B17884 /* Info.plist */,
 				626E72F21F72473100B17884 /* AppDelegate.swift */,
 				62F528661F7379EC00978A19 /* Backend.swift */,
 				6260FF6F1F738A2B00D8043E /* Extensions.swift */,
 				62F528601F73778100978A19 /* LobbiesViewController.swift */,
+				6247CD8C1F907AD000821766 /* QuestionsViewController.swift */,
 				62F528681F7381A300978A19 /* WaitingViewController.swift */,
 				626E72FB1F72473100B17884 /* Assets.xcassets */,
 				626E72FD1F72473100B17884 /* LaunchScreen.storyboard */,
@@ -194,6 +209,7 @@
 				62F528651F73794100978A19 /* Lobbies.json in Resources */,
 				626E72FF1F72473100B17884 /* LaunchScreen.storyboard in Resources */,
 				626E72FC1F72473100B17884 /* Assets.xcassets in Resources */,
+				6247CD951F907D0600821766 /* Questions.json in Resources */,
 				626E72FA1F72473100B17884 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,11 +224,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TriviaRich-iOS/Pods-TriviaRich-iOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionCableClient/ActionCableClient.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionCableClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -264,8 +286,12 @@
 				6260FF721F738FAA00D8043E /* MatchupView.swift in Sources */,
 				62F528671F7379EC00978A19 /* Backend.swift in Sources */,
 				62F528691F7381A300978A19 /* WaitingViewController.swift in Sources */,
+				6247CD8F1F907B9500821766 /* AnswerButton.swift in Sources */,
+				6247CD8D1F907AD000821766 /* QuestionsViewController.swift in Sources */,
+				6236F4601F9DBB780033C4DD /* Game.swift in Sources */,
 				626E72F31F72473100B17884 /* AppDelegate.swift in Sources */,
 				6260FF6E1F7387C700D8043E /* LoadingView.swift in Sources */,
+				6247CD911F907C5000821766 /* Question.swift in Sources */,
 				62F528611F73778100978A19 /* LobbiesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

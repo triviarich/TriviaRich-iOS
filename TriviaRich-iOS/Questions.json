@@ -1,0 +1,29 @@
+[
+ {
+ "id": 1,
+ "text": "What is Quentin Tarantino's best film?",
+ "a": "Jackie Brown",
+ "b": "Pulp Fiction",
+ "c": "Reservoir Dogs",
+ "d": "Django Unchained",
+ "answer": "b"
+ },
+ {
+ "id": 2,
+ "text": "What is the smallest planet?",
+ "a": "Jupiter",
+ "b": "Mercury",
+ "c": "Pluto",
+ "d": "Earth",
+ "answer": "c"
+ },
+ {
+ "id": 3,
+ "text": "What team won the 2017 NBA Finals?",
+ "a": "Warriors",
+ "b": "Cavaliers",
+ "c": "Kings",
+ "d": "Lakers",
+ "answer": "a"
+ }
+]

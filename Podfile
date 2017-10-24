@@ -7,5 +7,7 @@ target 'TriviaRich-iOS' do
 
   # Pods for TriviaRich-iOS
     pod 'SnapKit'
+    pod 'Alamofire'
+    pod 'ActionCableClient'
 
 end

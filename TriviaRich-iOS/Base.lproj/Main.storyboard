@@ -74,11 +74,27 @@
                     </view>
                     <connections>
                         <outlet property="containerView" destination="rR1-Nt-u1w" id="xC9-tF-qFs"/>
+                        <segue destination="UdR-UO-Lea" kind="presentation" identifier="questionsSegue" id="Egy-Qu-Gjb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CNb-k8-tpm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2676" y="-320.68965517241384"/>
+        </scene>
+        <!--Questions View Controller-->
+        <scene sceneID="2on-eK-MVM">
+            <objects>
+                <viewController id="UdR-UO-Lea" customClass="QuestionsViewController" customModule="TriviaRich_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="USp-xu-rRD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="jhJ-yN-13f"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T2k-cf-zHS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3655" y="-321"/>
         </scene>
         <!--Play-->
         <scene sceneID="lWb-in-Zxk">

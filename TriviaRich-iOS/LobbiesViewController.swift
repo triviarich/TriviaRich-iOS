@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ActionCableClient
 
 class LobbiesViewController: UITableViewController {
     
