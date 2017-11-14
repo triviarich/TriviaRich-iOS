@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension QuestionsViewController: AnswerButtonDelegate {
+    func didTap(button: AnswerButton) {
+        let currentIndex = game.questions.index(of: currentQuestion)
+    }
+}
+
 class QuestionsViewController: UIViewController {
     
     private let buttonHeight = 50
@@ -18,7 +24,7 @@ class QuestionsViewController: UIViewController {
     private var currentQuestion = Question()
     
     private let remainingLabel = UILabel()
-    private let answerAButton = AnswerButton()
+    fileprivate let answerAButton = AnswerButton()
     private let answerBButton = AnswerButton()
     private let answerCButton = AnswerButton()
     private let answerDButton = AnswerButton()
@@ -35,6 +41,9 @@ class QuestionsViewController: UIViewController {
         setupAnswerBButton()
         setupAnswerAButton()
         setupQuestionLabel()
+        
+        let time = TimeInterval()
+        time.
     }
 
     override func didReceiveMemoryWarning() {
